@@ -1,0 +1,12 @@
+dbt_transformation:
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DB_HOST', 'localhost') }}"
+      user: "{{ env_var('DB_USER', 'postgres') }}"
+      pass: "{{ env_var('DB_PASS', 'postgres') }}"
+      port: "{{ env_var('DB_PORT', '5432') | int }}"
+      dbname: "{{ env_var('DB_NAME', 'posey') }}"
+      schema: "{{ env_var('DB_SCHEMA', 'dev_staging') }}"
+      threads: 4
+  target: dev
