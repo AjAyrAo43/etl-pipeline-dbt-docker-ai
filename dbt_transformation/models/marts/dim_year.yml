@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: dim_year
+    description: Time dimension table for enterprise reporting years.
+    columns:
+      - name: year_key
+        description: Primary key calendar year identifier.
+        tests:
+          - unique
+          - not_null

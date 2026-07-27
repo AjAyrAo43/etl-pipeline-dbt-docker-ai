@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_variable
+    description: Dimension table containing unique financial variable codes and their associated units.
+    columns:
+      - name: variable_key
+        description: Surrogate primary key for financial variable dimension.
+        tests:
+          - unique
+          - not_null
+
+      - name: variable_code
+        description: Code representing the financial metric variable.
+        tests:
+          - unique
+          - not_null

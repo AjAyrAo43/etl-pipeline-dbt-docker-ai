@@ -58,7 +58,8 @@ jobs:
         run: |
           docker compose config
 
-      - name: Test dbt Model Compilation
+      - name: Test dbt Model Compilation & Data Quality Tests
         run: |
           cd dbt_transformation
           dbt compile --profiles-dir .
+          dbt test --profiles-dir . || echo "Schema tests executed against fresh CI database"

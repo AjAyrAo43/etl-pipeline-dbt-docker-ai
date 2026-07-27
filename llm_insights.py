@@ -75,7 +75,7 @@ def generate_insights_with_llm(kpi_df: pd.DataFrame, summary_df: pd.DataFrame) -
             response = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[
-                    {"role": "system", "content": "You are a Senior Financial Data Analyst at a top strategy consulting firm (FischerJordan). Provide an executive summary with key observations, business implications, and actionable recommendations based on the financial dataset provided."},
+                    {"role": "system", "content": "You are a Senior Financial Data Analyst & Strategy Consultant (FischerJordan). Generate a structured executive report with: 1. Executive Summary, 2. Deep-Dive Financial Analysis, 3. Enterprise Risk Assessment, and 4. Strategic Recommendations."},
                     {"role": "user", "content": f"Financial Data Summary:\n{context_text}"}
                 ]
             )
@@ -102,10 +102,13 @@ def generate_insights_with_llm(kpi_df: pd.DataFrame, summary_df: pd.DataFrame) -
         )
         
     report_lines.extend([
-        "\n## 3. Strategic Recommendations for Client Stakeholders",
-        "1. **Cost Optimization**: Prioritize monitoring for high-variance variables identified in the top financial aggregates.",
-        "2. **Data Governance & Quality**: Ensure continuous monitoring of non-null constraints and schema validations established in dbt.",
-        "3. **Predictive Modeling**: Leverage multi-year metric trends to build predictive forecasting models for client financial planning."
+        "\n## 3. Enterprise Risk Assessment",
+        "- **Metric Volatility Risk**: Significant variance observed across multi-year reporting cycles requires automated threshold monitoring.",
+        "- **Schema Drift Risk**: Schema tests (`not_null`, `unique`) in dbt safeguard against upstream data structure modifications.",
+        "\n## 4. Strategic Recommendations for Client Stakeholders",
+        "1. **Cost & Spend Optimization**: Prioritize variance tracking for top aggregate metric categories.",
+        "2. **Continuous Data Quality Enforcement**: Maintain automated CI/CD schema and SQL test suites.",
+        "3. **Predictive Financial Modeling**: Leverage multi-year historical baselines for scenario forecasting."
     ])
     
     return "\n".join(report_lines)

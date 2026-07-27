@@ -22,7 +22,11 @@ Based on the processed `fct_finance_2023` mart model:
 - **Variable `H34` (2020)**: Generated total aggregate value of **$80,716,500.00** across 127 records.
 - **Variable `H35` (2022)**: Generated total aggregate value of **$20,351,800.00** across 127 records.
 
-## 3. Strategic Recommendations for Client Stakeholders
-1. **Cost Optimization**: Prioritize monitoring for high-variance variables identified in the top financial aggregates.
-2. **Data Governance & Quality**: Ensure continuous monitoring of non-null constraints and schema validations established in dbt.
-3. **Predictive Modeling**: Leverage multi-year metric trends to build predictive forecasting models for client financial planning.
+## 3. Enterprise Risk Assessment
+- **Metric Volatility Risk**: Significant variance observed across multi-year reporting cycles requires automated threshold monitoring.
+- **Schema Drift Risk**: Schema tests (`not_null`, `unique`) in dbt safeguard against upstream data structure modifications.
+
+## 4. Strategic Recommendations for Client Stakeholders
+1. **Cost & Spend Optimization**: Prioritize variance tracking for top aggregate metric categories.
+2. **Continuous Data Quality Enforcement**: Maintain automated CI/CD schema and SQL test suites.
+3. **Predictive Financial Modeling**: Leverage multi-year historical baselines for scenario forecasting.
