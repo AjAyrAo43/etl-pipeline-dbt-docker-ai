@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: fct_finance_2023
+    description: Transformed and cleaned enterprise financial facts mart model.
+    columns:
+      - name: year
+        description: Reporting calendar year.
+        tests:
+          - not_null
+
+      - name: value
+        description: Cleaned financial metric numeric value (converted to standard Dollars or raw units).
+        tests:
+          - not_null
+
+      - name: units
+        description: Unit of measurement (e.g. Dollars, Percentage, Count).
+        tests:
+          - not_null
+
+      - name: variable_code
+        description: Unique code representing the enterprise financial metric variable.
+        tests:
+          - not_null

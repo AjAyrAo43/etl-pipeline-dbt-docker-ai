@@ -1,0 +1,4 @@
+# Run the ETL pipeline script locally every day at 12:00 AM morning
+0 0 * * * /usr/bin/bash /mnt/c/Users/USER/Documents/CDE-course-material/Assignment/ETL_Pipeline_with_Python_and_DBT/run_etl_pipeline.sh
+# Run the ETL pipeline script with docker every day at 12:00 AM morning
+0 0 * * * /usr/bin/bash /mnt/c/Users/USER/Documents/CDE-course-material/Assignment/ETL_Pipeline_with_Python_and_DBT/cron_daily_run_for_docker.sh

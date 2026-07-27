@@ -1,0 +1,9 @@
+Raw/
+__pycache__
+*.env
+.env
+logs/
+*.log
+*.db
+Miniconda3-latest-Linux-x86_64.sh
+

@@ -1,0 +1,59 @@
+services:
+  postgres_db:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - etl_network
+
+  python_etl_runner:
+    build: .
+    image: datawithojo/etl-runner:latest
+    container_name: python_etl_runner
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: postgres_db
+      DB_PORT: 5432
+    networks:
+      - etl_network
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+
+  dbt_runner:
+    build:
+      context: ./dbt_transformation
+    image: datawithojo/dbt-runner:latest
+    container_name: dbt_runner
+    environment:
+      DBT_PROFILES_DIR: /app/dbt_transformation
+      DB_HOST: postgres_db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASSWORD}
+      DB_DBNAME: ${DB_NAME}
+      DB_SCHEMA: dev_staging
+    volumes:
+      - ./dbt_transformation:/app/dbt_transformation
+    networks:
+      - etl_network
+    depends_on:
+      python_etl_runner:
+        condition: service_completed_successfully
+
+networks:
+  etl_network:
+    driver: bridge

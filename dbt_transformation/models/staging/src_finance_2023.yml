@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: finance
+    description: A clone of a Posey database source data.
+    database: posey
+    schema: dev_staging
+    tables:
+      - name: finance_2023
+        description: Raw finance data.
+
+        columns:
+          - name: year
+            description: The reporting year.
+            tests:
+              - not_null
+
+          - name: value
+            description: The recorded financial value.
+            tests:
+              - not_null
+
+          - name: variable_code
+            description: Code representing the financial variable.
+            tests:
+              - not_null
